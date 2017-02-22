@@ -21,26 +21,16 @@ namespace OrangeBricks.Web.Controllers.Appointments.Builders
 
         public void Handle(BookAppointmentCommand command)
         {
-            //Schedule schedule = new Schedule();
-            //schedule.Createdby = command.BuyerUserId;
-            //schedule.PropertyId = command.PropertyId;
-//            string AppoinmentDateTime = command.StartDatetime;
-            //command.EndDatetime =  command.StartDatetime.AddMinutes(30);
-            //   sDateDate = Convert.ToDateTime(AppoinmentDateTime);
-            //schedule.StartDatetime = AppointmentDate;
-            //schedule.EndDatetime = AppointmentDate.AddMinutes(30);
-            DateTime dt1 = Convert.ToDateTime(command.StartDatetime); //, "dd/MM/yyyy hh:mm:ss", CultureInfo.InvariantCulture);
-
-
             var appointment = new Models.Appointment
             {
                 PropertyId = command.PropertyId,
-                StartDatetime = dt1,
-                EndDatetime = dt1.AddMinutes(30),
+                StartDatetime = Convert.ToDateTime(command.StartDatetime),
+                EndDatetime = Convert.ToDateTime(command.StartDatetime).AddMinutes(30),
                 Status = (int) SlotStatus.Booked,
                 BuyerUserId = command.BuyerUserId
             };
             _context.Appointments.Add(appointment);
+
             _context.SaveChanges();
         }
     }

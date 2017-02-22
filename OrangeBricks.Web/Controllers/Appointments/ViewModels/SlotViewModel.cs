@@ -10,7 +10,9 @@ namespace OrangeBricks.Web.Controllers.Appointments.ViewModels
         Available,
         Booked,
         Attended,
-        Offered
+        OfferPlaced,
+        OfferedAccepted,
+        OfferedRejected
     }
     public class SlotViewModel
     {

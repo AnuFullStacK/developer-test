@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using OrangeBricks.Web.Models;
-
+using System.Linq;
+using OrangeBricks.Web.Controllers.Appointments.ViewModels;
 namespace OrangeBricks.Web.Controllers.Property.Commands
 {
     public class MakeOfferCommandHandler
@@ -25,13 +26,17 @@ namespace OrangeBricks.Web.Controllers.Property.Commands
                 UpdatedAt = DateTime.Now
             };
 
+
             if (property.Offers == null)
             {
                 property.Offers = new List<Offer>();
             }
                 
             property.Offers.Add(offer);
-            
+
+            var appointment = _context.Appointments.FirstOrDefault(x => x.PropertyId == command.PropertyId);
+            appointment.Status = (int) SlotStatus.OfferPlaced;
+
             _context.SaveChanges();
         }
     }

@@ -18,7 +18,6 @@
         <button type="submit" class="btn btn-default">Search</button>
     </div>
     </div>
-    
 }
 
 <p>@Model.Properties.Count properties matching your criteria...</p>
@@ -30,7 +29,37 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    <a href="@Url.Action("ViewSlot", "Appointments", new {Id = property.Id,Streetname=property.StreetName})" class="btn btn-primary">
-        Book Viewing
-    </a>
+    if(property.AppointmentId <= 0){
+        <a href="@Url.Action("ViewSlot", "Appointments", new {Id = property.Id,Streetname=property.StreetName})" class="btn btn-primary">
+            Book Viewing
+        </a>
+    }
+    else {
+        switch (property.AppointmentStatus)
+        {
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Booked:
+                {
+                    <p><i>You have already booked for viewing.</i></p>
+                    break;
+                }
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Attended:
+                {
+                    <a href="@Url.Action("MakeOffer", "Property" , new {id=property.Id})" class="btn btn-primary">
+                        Make Offer
+                    </a>
+                    break;
+                }
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.OfferedAccepted:
+                {
+                    <p><i>Congratulations and your offer has been accepted!</i></p>
+                    break;
+                }
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.OfferedRejected:
+                {
+                    <p><i>Sorry your offer has been rejected!</i></p>
+                    break;
+                }
+        }
+    }
+}
 }

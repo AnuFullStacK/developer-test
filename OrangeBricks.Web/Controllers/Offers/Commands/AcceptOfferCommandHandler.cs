@@ -19,6 +19,10 @@ namespace OrangeBricks.Web.Controllers.Offers.Commands
             offer.UpdatedAt = DateTime.Now;
             offer.Status = OfferStatus.Accepted;
 
+            //var appointment = _context.Appointments.FirstOrDefault(x => x.PropertyId == offer.PropertyId);
+            //appointment.Status = (int)SlotStatus.OfferPlaced;
+
+
             _context.SaveChanges();
         }
     }

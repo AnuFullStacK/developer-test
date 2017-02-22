@@ -12,7 +12,7 @@ namespace OrangeBricks.Web.Controllers.Appointments
 {
     public class AppointmentsController : Controller
     {
-//
+
         private readonly IOrangeBricksContext _context;
 
         public AppointmentsController(IOrangeBricksContext context)
@@ -40,6 +40,15 @@ namespace OrangeBricks.Web.Controllers.Appointments
             var builder = new BookAppointmentCommandHandler(_context);
             builder.Handle(command);
             return RedirectToAction("Index", "Property", new { id=command.PropertyId});
+        }
+
+
+        [OrangeBricksAuthorize(Roles = "Seller")]
+        public ActionResult MarkAttendance(int id)
+        {
+            var builder = new MarkAttendanceCommandHandler(_context);
+            builder.Handle(id);
+            return RedirectToAction("Index", "Property", new { id = id });
         }
     }
 }

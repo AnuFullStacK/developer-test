@@ -28,7 +28,8 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                         NumberOfBedrooms = p.NumberOfBedrooms,
                         PropertyType = p.PropertyType,
                         IsListedForSale = p.IsListedForSale,
-                        AppointmentStatus = _context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Status != null ? (SlotStatus)0 : (SlotStatus)_context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Status
+                        AppointmentId = _context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id) == null ? 0 : _context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Id,
+                        AppointmentStatus = _context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id) == null ? SlotStatus.Available : (SlotStatus)_context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Status
                     })
                     .ToList()
             }; ;

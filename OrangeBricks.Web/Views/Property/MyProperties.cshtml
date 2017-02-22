@@ -16,33 +16,41 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    @{
-        switch (property.AppointmentStatus)
-        {
-
-            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Booked:
+    switch (property.AppointmentStatus)
+    {
+        case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Booked:
             {
-                // Mark Attended
-                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">Mark Attended</a>
+                //Mark Attended
+                <p><i>Customer Viewed the property. Please mark the attendance.</i></p>
+                <a href="@Url.Action("MarkAttendance", "Appointments", new { id = property.Id})" class="btn btn-primary">
+                    Mark Attended
+                </a>
+               //Html.ActionLink("Mark Attended", "MarkAttendance", "Appointments", new { id = property.Id });
                 break;
             }
-
-            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.:
+        case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.OfferPlaced:
             {
                 // Accept Offer
-                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">Mark Attended</a>
+                <p><i>Customer placed a offer to the property. Please accept the offer if you wish.</i></p>
+                <a href="@Url.Action("OnProperty", "Offers", new { id = property.Id })" class="btn btn-primary">
+                    View Offer
+                </a>
                 break;
             }
-
-            default:
+        case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.OfferedAccepted:
             {
-                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a>
+                // Accept Offer
+                <p><i>You have accepted the offer.</i></p>
                 break;
             }
-
-        }
+        case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Available:
+            {
+                // Accept Offer
+                <p><i>No views booked yet.</i></p>
+                break;
+            }
     }
-    
+
     if (!property.IsListedForSale)
     {
         using (Html.BeginForm("ListForSale", "Property"))
@@ -53,3 +61,18 @@
     }
 
 }
+
+<script type="text/javascript">
+    $("a[data-form-method='post']").click(function (event) {
+        event.preventDefault();
+        var element = $(this);
+        var action = element.attr("href");
+        element.closest("form").each(function () {
+            var form = $(this);
+            form.attr("action", action);
+            form.submit();
+        });
+    });
+
+</script>
+

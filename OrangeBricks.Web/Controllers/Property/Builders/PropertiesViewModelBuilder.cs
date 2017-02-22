@@ -3,6 +3,7 @@ using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using OrangeBricks.Web.Controllers.Property.ViewModels;
 using OrangeBricks.Web.Models;
+using OrangeBricks.Web.Controllers.Appointments.ViewModels;
 
 namespace OrangeBricks.Web.Controllers.Property.Builders
 {
@@ -36,7 +37,7 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
             };
         }
 
-        private static PropertyViewModel MapViewModel(Models.Property property)
+        private PropertyViewModel MapViewModel(Models.Property property)
         {
             return new PropertyViewModel
             {
@@ -44,7 +45,9 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                 StreetName = property.StreetName,
                 Description = property.Description,
                 NumberOfBedrooms = property.NumberOfBedrooms,
-                PropertyType = property.PropertyType
+                PropertyType = property.PropertyType,
+                AppointmentId = _context.Appointments.FirstOrDefault(x => x.PropertyId == property.Id) == null ? 0 : _context.Appointments.FirstOrDefault(x => x.PropertyId == property.Id).Id,
+                AppointmentStatus = _context.Appointments.FirstOrDefault(x => x.PropertyId == property.Id) == null ? SlotStatus.Available : (SlotStatus)_context.Appointments.FirstOrDefault(x => x.PropertyId == property.Id).Status
             };
         }
     }

@@ -175,6 +175,8 @@
     <Compile Include="Attributes\OrangeBricksAuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Appointments\AppointmentsController.cs" />
+    <Compile Include="Controllers\Appointments\Commands\AppointmentStatusCommand.cs" />
+    <Compile Include="Controllers\Appointments\Commands\MarkAttendanceCommandHandler.cs" />
     <Compile Include="Controllers\Appointments\Commands\BookAppointmentCommandHandler.cs" />
     <Compile Include="Controllers\Appointments\Commands\BookAppointmentCommand.cs" />
     <Compile Include="Controllers\Appointments\Commands\PropertyInfo.cs" />
