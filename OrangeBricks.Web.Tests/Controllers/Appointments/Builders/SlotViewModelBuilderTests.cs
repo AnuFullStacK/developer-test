@@ -42,7 +42,7 @@ public class SlotViewModelBuilderTests
         var builder = new SlotViewModelBuilder(_context);
 
             var schedules = new List<Models.Schedule>{
-                new Models.Schedule{ Id=1, StartDatetime=Convert.ToDateTime("21/02/2017 09:00:00"), EndDatetime=Convert.ToDateTime("21/02/2017 11:00:00"),PropertyId=1},
+            new Models.Schedule{ Id=1, StartDatetime=Convert.ToDateTime("21/02/2017 09:00:00"),  EndDatetime=Convert.ToDateTime("21/02/2017 11:00:00"),PropertyId=1},
             };
 
             var mockSet = Substitute.For<IDbSet<Models.Schedule>>()
