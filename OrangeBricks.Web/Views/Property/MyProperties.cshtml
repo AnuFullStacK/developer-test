@@ -16,8 +16,33 @@
     <p>@property.NumberOfBedrooms bedroom @property.PropertyType</p>
     <p>@property.Description</p>
 
-    <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a>
-        
+    @{
+        switch (property.AppointmentStatus)
+        {
+
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.Booked:
+            {
+                // Mark Attended
+                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">Mark Attended</a>
+                break;
+            }
+
+            case OrangeBricks.Web.Controllers.Appointments.ViewModels.SlotStatus.:
+            {
+                // Accept Offer
+                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">Mark Attended</a>
+                break;
+            }
+
+            default:
+            {
+                <a href="@Url.Action("OnProperty", "Offers", new {id = property.Id})">View offers that have been made on this property...</a>
+                break;
+            }
+
+        }
+    }
+    
     if (!property.IsListedForSale)
     {
         using (Html.BeginForm("ListForSale", "Property"))
