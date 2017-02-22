@@ -12,7 +12,7 @@ namespace OrangeBricks.Web.Controllers.Appointments
 {
     public class AppointmentsController : Controller
     {
-
+//
         private readonly IOrangeBricksContext _context;
 
         public AppointmentsController(IOrangeBricksContext context)
