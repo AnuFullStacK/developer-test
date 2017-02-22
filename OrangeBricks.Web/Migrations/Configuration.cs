@@ -9,9 +9,8 @@ namespace OrangeBricks.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "OrangeBricks.Web.Models.ApplicationDbContext";
-
         }
 
         protected override void Seed(OrangeBricks.Web.Models.ApplicationDbContext context)

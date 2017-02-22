@@ -22,19 +22,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-.selected{
-    background-color:grey;
-}
-
-.dateNotSelected{
-    display:none;
-}
-
-.dateSelected{
-    display:block;
-}
-
-ul {
-  list-style-type: none;
-}

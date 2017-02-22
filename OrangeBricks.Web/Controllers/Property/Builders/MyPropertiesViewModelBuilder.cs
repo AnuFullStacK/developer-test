@@ -1,7 +1,6 @@
 using System.Linq;
 using OrangeBricks.Web.Controllers.Property.ViewModels;
 using OrangeBricks.Web.Models;
-using OrangeBricks.Web.Controllers.Appointments.ViewModels;
 
 namespace OrangeBricks.Web.Controllers.Property.Builders
 {
@@ -27,11 +26,10 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
                         Description = p.Description,
                         NumberOfBedrooms = p.NumberOfBedrooms,
                         PropertyType = p.PropertyType,
-                        IsListedForSale = p.IsListedForSale,
-                        AppointmentStatus = _context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Status != null ? (SlotStatus)0 : (SlotStatus)_context.Appointments.FirstOrDefault(x => x.PropertyId == p.Id).Status
+                        IsListedForSale = p.IsListedForSale
                     })
                     .ToList()
-            }; ;
+            };
         }
     }
 }
