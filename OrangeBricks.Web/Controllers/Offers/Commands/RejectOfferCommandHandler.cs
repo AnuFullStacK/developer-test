@@ -1,5 +1,7 @@
 using System;
 using OrangeBricks.Web.Models;
+using System.Linq;
+using OrangeBricks.Web.Controllers.Appointments.ViewModels;
 
 namespace OrangeBricks.Web.Controllers.Offers.Commands
 {
@@ -18,6 +20,9 @@ namespace OrangeBricks.Web.Controllers.Offers.Commands
 
             offer.UpdatedAt = DateTime.Now;
             offer.Status = OfferStatus.Rejected;
+
+            var appointment = _context.Appointments.FirstOrDefault(x => x.PropertyId == command.PropertyId);
+            appointment.Status = (int)SlotStatus.OfferedRejected;
 
             _context.SaveChanges();
         }
