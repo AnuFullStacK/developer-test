@@ -72,10 +72,20 @@ namespace OrangeBricks.Web.Controllers.Property
 
             return RedirectToAction("MyProperties");
         }
+        [HttpPost]
+        [OrangeBricksAuthorize(Roles = "Buyer")]
+        public ActionResult BookAppointment(int id)
+        {
+            var builder = new MakeOfferViewModelBuilder(_context);
+            var viewModel = builder.Build(id);
+            return View(viewModel);
+        }
+
 
         [OrangeBricksAuthorize(Roles = "Buyer")]
         public ActionResult MakeOffer(int id)
         {
+
             var builder = new MakeOfferViewModelBuilder(_context);
             var viewModel = builder.Build(id);
             return View(viewModel);

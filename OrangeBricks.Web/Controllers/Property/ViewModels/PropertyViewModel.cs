@@ -1,3 +1,4 @@
+using OrangeBricks.Web.Controllers.Appointments.ViewModels;
 namespace OrangeBricks.Web.Controllers.Property.ViewModels
 {
     public class PropertyViewModel
@@ -8,5 +9,6 @@ namespace OrangeBricks.Web.Controllers.Property.ViewModels
         public string PropertyType { get; set; }
         public int Id { get; set; }
         public bool IsListedForSale { get; set; }
+        public SlotStatus AppointmentStatus { get; set; }
     }
 }
